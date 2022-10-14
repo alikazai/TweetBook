@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TweetBook.Data;
+using TweetBook.Services;
 
 namespace TweetBook.Installers;
 
@@ -15,5 +16,7 @@ public class DbInstaller : IInstaller
 
         service.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<DataContext>();
+
+        service.AddSingleton<IPostService, PostService>();
     }
 }
